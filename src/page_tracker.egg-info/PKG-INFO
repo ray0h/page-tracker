@@ -1,3 +1,4 @@
 Metadata-Version: 2.1
 Name: page-tracker
 Version: 1.0.0
+Provides-Extra: dev
