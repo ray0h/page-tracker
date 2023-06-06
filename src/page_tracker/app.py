@@ -6,6 +6,7 @@ from redis import Redis, RedisError
 
 app = Flask(__name__)
 
+
 @app.get("/")
 def index():
     try:
