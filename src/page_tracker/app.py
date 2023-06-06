@@ -1,15 +1,21 @@
 from flask import Flask
-from redis import Redis
+from redis import Redis, RedisError
 from functools import cache
+import os
 
 app = Flask(__name__)
 redis = Redis()
 
 @app.get("/")
 def index():
-  page_views = redis().incr("page_views")
-  return f"This page has been viewed {page_views} times."
+  try:
+    page_views = redis().incr("page_views")
+  except RedisError:
+    app.logger.exception("Redis error")
+    return "Sorry, something went wrong \N{pensive face}", 500
+  else:
+    return f"This page has been viewed {page_views} times."
 
 @cache
 def redis():
-  return Redis()
+  return Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379"))
