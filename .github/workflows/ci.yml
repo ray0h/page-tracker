@@ -19,7 +19,7 @@ jobs:
         run: >
           docker compose --profile testing up
           --build
-          --exit-code-from-test-service
+          --exit-code-from test-service
       - name: Login to DockerHub
         uses: docker/login-action@v2
         if: ${{ github.event_name == 'push' }}

@@ -18,7 +18,7 @@ def test_should_handle_redis_connection_error(mock_redis, http_client):
 
     # then
     assert response.status_code == 500
-    assert response.text == "Sorry, something went wrong \N{pensive face}"
+    assert response.text == "Sorry, something went wrong \N{thinking face}"
 
 @unittest.mock.patch("page_tracker.app.redis")
 def test_should_call_redis_incr(mock_redis, http_client):
